@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * By Menno Gouw
  */
 
-public class Map
+public class GameWorld
 {
 	private Brick[][] bricks;
 

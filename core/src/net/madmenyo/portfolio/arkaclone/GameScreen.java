@@ -5,8 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import net.madmenyo.portfolio.arkaclone.game.Brick;
-import net.madmenyo.portfolio.arkaclone.game.Map;
+import net.madmenyo.portfolio.arkaclone.game.GameWorld;
 
 /**
  * ArkaClone [2020]
@@ -20,7 +19,7 @@ public class GameScreen extends BaseScreen
 	private SpriteBatch batch;
 	private TextureAtlas atlas;
 
-	private Map map;
+	private GameWorld gameWorld;
 
 	public GameScreen(Stage stage, AssetManager assetManager)
 	{
