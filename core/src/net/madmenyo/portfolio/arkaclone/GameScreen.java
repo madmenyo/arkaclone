@@ -25,6 +25,8 @@ public class GameScreen extends BaseScreen
 	{
 		super(stage, assetManager);
 		batch = new SpriteBatch();
+		atlas = assetManager.get(Assets.SHEET);
+		gameWorld = new GameWorld(atlas);
 	}
 
 	@Override
