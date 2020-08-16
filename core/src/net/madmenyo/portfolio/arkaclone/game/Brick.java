@@ -12,6 +12,9 @@ import java.awt.Rectangle;
 public class Brick
 {
 	private Rectangle collisionRectangle;
-	public Sprite sprite;
+	private Sprite sprite;
+
+
+
 
 }

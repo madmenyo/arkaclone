@@ -1,5 +1,7 @@
 package net.madmenyo.portfolio.arkaclone.game;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 /**
  * ArkaClone [2020]
  * By Menno Gouw
@@ -7,5 +9,14 @@ package net.madmenyo.portfolio.arkaclone.game;
 
 public class Map
 {
-	
+	private Brick[][] bricks;
+
+	public void update(float delta){
+
+	}
+
+	public Brick[][] getBricks()
+	{
+		return bricks;
+	}
 }

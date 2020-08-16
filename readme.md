@@ -16,5 +16,5 @@ libGDX 1.9.10<br/>
 
 ## Credits 
 
-Game assets downloaded from http://opengameart.com and created by Buch<br/>
+Game assets Breakout set downloaded from http://opengameart.com and created by Buch<br/>
 Font Power Pixel-7 downloaded from http://dafont.com and created by Style-7<br/>
