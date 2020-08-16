@@ -22,6 +22,7 @@ public class Assets
 	 * Loads all assets, if ever needs to dispose individual assets create additional loaders for these.
  	 */
 	public void loadAll(){
+		assetManager.load(SHEET);
 		assetManager.load(SKIN);
 	}
 
