@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import net.madmenyo.portfolio.arkaclone.game.Brick;
+import net.madmenyo.portfolio.arkaclone.game.Map;
 
 /**
  * ArkaClone [2020]
@@ -19,7 +20,7 @@ public class GameScreen extends BaseScreen
 	private SpriteBatch batch;
 	private TextureAtlas atlas;
 
-	private Brick[][] bricks;
+	private Map map;
 
 	public GameScreen(Stage stage, AssetManager assetManager)
 	{
@@ -36,6 +37,10 @@ public class GameScreen extends BaseScreen
 	@Override
 	public void update(float delta)
 	{
+
+		batch.begin();
+
+		batch.end();
 
 	}
 
