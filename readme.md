@@ -10,11 +10,11 @@ Lose assets not provided, keep the PackImages() call in DesktopLauncher commente
 
 ### My Setup
 
-Android Studio 4.0.1
-Gradle version: 6.1.1
-libGDX 1.9.10
+Android Studio 4.0.1<br/>
+Gradle version: 6.1.1<br/>
+libGDX 1.9.10<br/>
 
 ## Credits 
 
-Game assets downloaded from http://opengameart.com and created by Buch
-Font Power Pixel-7 downloaded from http://dafont.com and created by Style-7
+Game assets downloaded from http://opengameart.com and created by Buch<br/>
+Font Power Pixel-7 downloaded from http://dafont.com and created by Style-7<br/>
