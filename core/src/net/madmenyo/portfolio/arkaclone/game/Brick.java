@@ -15,6 +15,8 @@ public class Brick
 	private Sprite sprite;
 
 
-
-
+	public Sprite getSprite()
+	{
+		return sprite;
+	}
 }

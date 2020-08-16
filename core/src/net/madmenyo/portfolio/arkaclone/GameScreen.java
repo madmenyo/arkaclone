@@ -37,8 +37,9 @@ public class GameScreen extends BaseScreen
 	public void update(float delta)
 	{
 
+		gameWorld.update(delta);
 		batch.begin();
-
+		gameWorld.draw();
 		batch.end();
 
 	}
