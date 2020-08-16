@@ -39,7 +39,7 @@ public class GameScreen extends BaseScreen
 
 		gameWorld.update(delta);
 		batch.begin();
-		gameWorld.draw();
+		gameWorld.draw(batch);
 		batch.end();
 
 	}

@@ -38,11 +38,6 @@ public class GameWorld
 
 	}
 
-	public Brick[][] getBricks()
-	{
-		return bricks;
-	}
-
 	public void draw(SpriteBatch batch)
 	{
 		for (int y = 0; y < bricks[0].length; y++){

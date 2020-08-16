@@ -27,7 +27,13 @@ public class MainMenuScreen extends BaseScreen
 	{
 		super.show();
 
-		addButton("Play");
+		addButton("Play").addListener(new ClickListener(){
+			@Override
+			public void clicked(InputEvent event, float x, float y)
+			{
+				((Game)Gdx.app.getApplicationListener()).setScreen(new GameScreen(stage, assetManager));
+			}
+		});
 		addButton("Options").addListener(new ClickListener(){
 			@Override
 			public void clicked(InputEvent event, float x, float y)
