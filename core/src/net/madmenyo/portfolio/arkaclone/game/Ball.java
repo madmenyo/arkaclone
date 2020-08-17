@@ -20,19 +20,22 @@ public class Ball
 		Serving
 	}
 
+	private Paddle paddle;
+
 	private Vector2 direction = new Vector2(0, 1);
-	private float speed = 100;
+	private float speed = 250;
 	private Vector2 velocity = new Vector2();
 
 	private State ballState = State.Serving;
 
 	private Sprite sprite;
 
-	public Ball(Vector2 paddleCenter, TextureRegion ballRegion)
+	public Ball(Paddle paddle, TextureRegion ballRegion)
 	{
+		this.paddle = paddle;
 		sprite = new Sprite(ballRegion);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		sprite.setOriginBasedPosition(paddleCenter.x, paddleCenter.y + sprite.getHeight() / 2);
+		sprite.setOriginBasedPosition(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
 
 	}
 
@@ -43,6 +46,7 @@ public class Ball
 				ballState = State.Moving;
 			} else {
 				// Should move with paddle
+				sprite.setOriginBasedPosition(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
 				return;
 			}
 		}

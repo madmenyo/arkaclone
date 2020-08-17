@@ -48,7 +48,7 @@ public class GameWorld
 
 	private void createTestBall()
 	{
-		ball = new Ball(new Vector2(0, 20), atlas.findRegion("ball_blue"));
+		ball = new Ball(paddle, atlas.findRegion("ball_big_darkblue"));
 	}
 
 	private void createTestBricks(int width, int height)

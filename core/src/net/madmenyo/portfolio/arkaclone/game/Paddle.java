@@ -15,7 +15,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Paddle
 {
 	Sprite sprite;
-	private float speed = 100;
+	private float speed = 250;
 
 	public Paddle(TextureRegion region)
 	{
