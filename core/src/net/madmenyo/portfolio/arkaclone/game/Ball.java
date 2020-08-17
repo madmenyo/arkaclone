@@ -1,5 +1,11 @@
 package net.madmenyo.portfolio.arkaclone.game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -9,24 +15,48 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Ball
 {
+	private enum State{
+		Moving,
+		Serving
+	}
+
 	private Vector2 position;
 	private Vector2 currentPosition = new Vector2();
 	private Vector2 direction = new Vector2(0, 1);
-	private float speed = 0;
+	private float speed = 100;
 	private Vector2 velocity = new Vector2();
 
-	public Ball(Vector2 position)
+	private State ballState = State.Serving;
+
+	private Sprite sprite;
+
+	public Ball(Vector2 paddleCenter, TextureRegion ballRegion)
 	{
-		this.position = position;
+		this.position = paddleCenter;
+		sprite = new Sprite(ballRegion);
+		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+		sprite.setOriginBasedPosition(paddleCenter.x, paddleCenter.y + sprite.getHeight() / 2);
 	}
 
 	public void update(float delta){
+
+		if (ballState.equals(State.Serving)){
+			if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
+				ballState = State.Moving;
+			} else {
+				// Should move with paddle
+				return;
+			}
+		}
 		currentPosition.set(position);
 
 		velocity.set(direction).scl(speed * delta);
 		position.add(velocity);
 
 		// Check for collision on new position value
+	}
 
+	public void draw(SpriteBatch batch){
+		sprite.draw(batch);
 	}
 }
