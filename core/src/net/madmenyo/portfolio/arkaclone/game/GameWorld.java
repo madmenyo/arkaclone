@@ -16,8 +16,12 @@ public class GameWorld
 	public static final int BORDER_WIDTH = 16;
 
 	public static final int HORIZONTAL_BRICKS = 12;
+	public static final int VERTICAL_BRICKS = 16;
 
-	public static final float WORLD_WIDTH = BRICK_WIDTH * 12 + BORDER_WIDTH * 2;
+	public static final int PADDLE_SPACE = 128;
+
+	public static final float WORLD_WIDTH = BRICK_WIDTH * HORIZONTAL_BRICKS + BORDER_WIDTH * 2;
+	public static final float WORLD_HEIGHT = (BRICK_HEIGHT * VERTICAL_BRICKS) + (BORDER_WIDTH * 2) + PADDLE_SPACE;
 
 
 	private Brick[][] bricks;
