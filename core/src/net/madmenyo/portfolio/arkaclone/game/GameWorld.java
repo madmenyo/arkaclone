@@ -22,11 +22,15 @@ public class GameWorld
 
 	public static final int PADDLE_SPACE = 128;
 
-	public static final float WORLD_WIDTH = BRICK_WIDTH * HORIZONTAL_BRICKS + BORDER_WIDTH * 2;
-	public static final float WORLD_HEIGHT = (BRICK_HEIGHT * VERTICAL_BRICKS) + (BORDER_WIDTH * 2) + PADDLE_SPACE;
+	public static final float WORLD_WIDTH = BRICK_WIDTH * HORIZONTAL_BRICKS;
+	public static final float WORLD_HEIGHT = (BRICK_HEIGHT * VERTICAL_BRICKS) + PADDLE_SPACE;
+
+	public static final float HUD_HEIGHT = 32;
 
 
 	private TextureAtlas atlas;
+
+	private PlayField playField;
 
 	private Brick[][] bricks;
 	private Ball ball;
@@ -35,6 +39,7 @@ public class GameWorld
 	{
 		this.atlas = atlas;
 
+		playField = new PlayField(atlas.findRegion("borderside_yellow"), atlas.findRegion("bordercorner_yellow"));
 		createTestBricks(12, 8);
 		createTestBall();
 	}
@@ -61,6 +66,7 @@ public class GameWorld
 
 	public void draw(SpriteBatch batch)
 	{
+		playField.draw(batch);
 		for (int y = 0; y < bricks[0].length; y++){
 			for (int x = 0; x < bricks.length; x++){
 				bricks[x][y].getSprite().draw(batch);

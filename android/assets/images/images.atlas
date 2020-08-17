@@ -1,124 +1,138 @@
 
 images.png
-size: 512,32
+size: 128,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 ball_blue
   rotate: false
-  xy: 92, 3
+  xy: 102, 97
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
+bordercorner_yellow
+  rotate: false
+  xy: 102, 107
+  size: 16, 16
+  orig: 16, 16
+  offset: 0, 0
+  index: -1
+borderside_yellow
+  rotate: false
+  xy: 2, 85
+  size: 48, 16
+  orig: 48, 16
+  offset: 0, 0
+  index: -1
 brick_blue
   rotate: false
-  xy: 68, 13
+  xy: 68, 107
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_brown
   rotate: false
-  xy: 102, 13
+  xy: 2, 67
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_brown_blue
   rotate: false
-  xy: 136, 13
+  xy: 2, 49
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_green
   rotate: false
-  xy: 170, 13
+  xy: 2, 31
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_green_blue
   rotate: false
-  xy: 204, 13
+  xy: 2, 13
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_grey
   rotate: false
-  xy: 238, 13
+  xy: 68, 89
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_grey_blue
   rotate: false
-  xy: 272, 13
+  xy: 36, 67
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_purple
   rotate: false
-  xy: 306, 13
+  xy: 36, 49
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_purple_blue
   rotate: false
-  xy: 340, 13
+  xy: 36, 31
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_red
   rotate: false
-  xy: 374, 13
+  xy: 36, 13
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_red_blue
   rotate: false
-  xy: 408, 13
+  xy: 70, 71
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_yellow
   rotate: false
-  xy: 442, 13
+  xy: 70, 53
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 brick_yellow_blue
   rotate: false
-  xy: 476, 13
+  xy: 70, 35
   size: 32, 16
   orig: 32, 16
   offset: 0, 0
   index: -1
 heart_blue
   rotate: false
-  xy: 68, 2
+  xy: 2, 2
   size: 10, 9
   orig: 10, 9
   offset: 0, 0
   index: -1
 hearth_red
   rotate: false
-  xy: 80, 2
+  xy: 52, 92
   size: 10, 9
   orig: 10, 9
   offset: 0, 0
   index: -1
 paddle
   rotate: false
-  xy: 2, 9
+  xy: 2, 103
   size: 64, 20
   split: 17, 17, 0, 0
   pad: 18, 18, 0, 0

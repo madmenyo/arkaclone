@@ -16,9 +16,10 @@ public class Brick
 
 	public Brick(int x, int y, TextureRegion region)
 	{
-		float offset = GameWorld.WORLD_WIDTH / 2;
+		float offset = GameWorld.WORLD_WIDTH / 2 - 32;
 		sprite = new Sprite(region);
-		sprite.setBounds(x * GameWorld.BRICK_WIDTH - offset, y * GameWorld.BRICK_HEIGHT, GameWorld.BRICK_WIDTH, GameWorld.BRICK_HEIGHT);
+		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
+		sprite.setOriginBasedPosition(x * GameWorld.BRICK_WIDTH - offset, y * GameWorld.BRICK_HEIGHT);
 	}
 
 	public Sprite getSprite()

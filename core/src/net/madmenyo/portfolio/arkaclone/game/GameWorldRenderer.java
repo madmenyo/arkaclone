@@ -1,11 +1,8 @@
 package net.madmenyo.portfolio.arkaclone.game;
 
-import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import com.badlogic.gdx.utils.viewport.Viewport;
 
 /**
  * ArkaClone [2020]
@@ -34,6 +31,7 @@ public class GameWorldRenderer implements IWorldRenderer
 	{
 		batch.setProjectionMatrix(camera.combined);
 
+		// ToDo: should be drawing everything here
 		batch.begin();
 		gameWorld.draw(batch);
 		batch.end();
@@ -43,8 +41,13 @@ public class GameWorldRenderer implements IWorldRenderer
 	public void resize(int width, int height)
 	{
 		camera.setToOrtho(false, width, height);
-		camera.position.set(0, 0,0);
-		camera.zoom = 1f / (int)(width / GameWorld.WORLD_WIDTH);
+		camera.position.set(0, GameWorld.HUD_HEIGHT / 2,0);
+		float widthRatio = 1f / (width / (GameWorld.WORLD_WIDTH + GameWorld.BORDER_WIDTH * 2 ));
+		float heightRatio = 1f / (height / (GameWorld.WORLD_HEIGHT + GameWorld.BORDER_WIDTH * 2 + GameWorld.HUD_HEIGHT));
+		float largest;
+		if (widthRatio > heightRatio) largest = widthRatio;
+		else largest = heightRatio;
+		camera.zoom = largest;
 		camera.update();
 	}
 }

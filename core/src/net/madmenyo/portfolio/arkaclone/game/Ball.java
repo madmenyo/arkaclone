@@ -20,8 +20,6 @@ public class Ball
 		Serving
 	}
 
-	private Vector2 position;
-	private Vector2 currentPosition = new Vector2();
 	private Vector2 direction = new Vector2(0, 1);
 	private float speed = 100;
 	private Vector2 velocity = new Vector2();
@@ -32,11 +30,10 @@ public class Ball
 
 	public Ball(Vector2 paddleCenter, TextureRegion ballRegion)
 	{
-		this.position = paddleCenter;
 		sprite = new Sprite(ballRegion);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setOriginBasedPosition(paddleCenter.x, paddleCenter.y + sprite.getHeight() / 2);
-		
+
 	}
 
 	public void update(float delta){
@@ -49,11 +46,8 @@ public class Ball
 				return;
 			}
 		}
-		currentPosition.set(position);
-
 		velocity.set(direction).scl(speed * delta);
-		position.add(velocity);
-
+		sprite.translate(velocity.x, velocity.y);
 		// Check for collision on new position value
 	}
 
