@@ -4,6 +4,13 @@ size: 128,128
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
+ball_big_darkblue
+  rotate: false
+  xy: 70, 25
+  size: 8, 8
+  orig: 8, 8
+  offset: 0, 0
+  index: -1
 ball_blue
   rotate: false
   xy: 102, 97

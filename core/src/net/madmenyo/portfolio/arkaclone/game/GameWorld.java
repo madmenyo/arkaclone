@@ -32,6 +32,7 @@ public class GameWorld
 
 	private PlayField playField;
 
+	private Paddle paddle;
 	private Brick[][] bricks;
 	private Ball ball;
 
@@ -40,6 +41,7 @@ public class GameWorld
 		this.atlas = atlas;
 
 		playField = new PlayField(atlas.findRegion("borderside_yellow"), atlas.findRegion("bordercorner_yellow"));
+		paddle = new Paddle(atlas.findRegion("paddle"));
 		createTestBricks(12, 8);
 		createTestBall();
 	}
@@ -61,12 +63,14 @@ public class GameWorld
 	}
 
 	public void update(float delta){
+		paddle.update(delta);
 		ball.update(delta);
 	}
 
 	public void draw(SpriteBatch batch)
 	{
 		playField.draw(batch);
+		paddle.draw(batch);
 		for (int y = 0; y < bricks[0].length; y++){
 			for (int x = 0; x < bricks.length; x++){
 				bricks[x][y].getSprite().draw(batch);

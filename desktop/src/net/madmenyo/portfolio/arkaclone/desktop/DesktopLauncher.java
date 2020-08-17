@@ -8,7 +8,7 @@ import net.madmenyo.portfolio.arkaclone.ArkaClone;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		//PackImages();
+		PackImages();
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1280 / 2;
@@ -20,11 +20,13 @@ public class DesktopLauncher {
 	private static void PackImages()
 	{
 		TexturePacker.Settings settings = new TexturePacker.Settings();
+		settings.fast = true;
 
 		String input = "../../images";
 		String output = "images";
 		String name = "images.atlas";
 
 		TexturePacker.process(settings, input, output, name);
+
 	}
 }
