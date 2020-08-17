@@ -3,8 +3,6 @@ package net.madmenyo.portfolio.arkaclone.game;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import java.awt.Rectangle;
-
 /**
  * ArkaClone [2020]
  * By Menno Gouw

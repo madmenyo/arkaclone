@@ -5,7 +5,6 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
@@ -42,7 +41,6 @@ public class Ball
 		sprite = new Sprite(ballRegion);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setOriginBasedPosition(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
-
 	}
 
 	/**
@@ -54,7 +52,6 @@ public class Ball
 		sprite.set(ball.sprite);
 		// Randomizedirection
 		direction.rotate(MathUtils.random(360));
-
 	}
 
 	public void update(float delta){
@@ -71,7 +68,7 @@ public class Ball
 		}
 		velocity.set(direction).scl(speed * delta);
 		sprite.translate(velocity.x, velocity.y);
-		// Check for collision on new position value
+		// ToDo: Check for collision on new position value
 	}
 
 	public void draw(SpriteBatch batch){

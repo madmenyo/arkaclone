@@ -30,12 +30,12 @@ public class PlayField
 		//Horizontal border
 		int x = (int)rectangle.x;
 		int y = (int)(rectangle.y + rectangle.height);
-
 		batch.draw(cornerPiece, x, y);
 		batch.draw(cornerPiece, x, y - rectangle.height - 16);
 		x += 16;
 		for (int i = 0; i < 8; i++){
 			batch.draw(sidePiece, x, y);
+			// Adds bottom border, should be shown and functional with the specific power up.
 			//batch.draw(sidePiece, x, y - rectangle.height - 16);
 			x += 48;
 		}
@@ -45,7 +45,6 @@ public class PlayField
 		// Vertical border
 		x = (int)rectangle.x;
 		y = (int)rectangle.y + GameWorld.BORDER_WIDTH;
-
 		for (int i = 0; i < 8; i++){
 			batch.draw(sidePiece, x, y, 16, 0, 48, 16, 1, 1, 90);
 			batch.draw(sidePiece, x + rectangle.width + GameWorld.BORDER_WIDTH, y, 16, 0, 48, 16, 1, 1, 90);

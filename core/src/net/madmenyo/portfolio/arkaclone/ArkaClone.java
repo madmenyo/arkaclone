@@ -18,6 +18,5 @@ public class ArkaClone extends Game
 
 		Stage stage = new Stage(new ExtendViewport(1280, 720));
 		setScreen(new MainMenuScreen(stage, assets.getAssetManager()));
-
 	}
 }

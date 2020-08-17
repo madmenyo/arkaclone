@@ -1,9 +1,7 @@
 package net.madmenyo.portfolio.arkaclone.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * ArkaClone [2020]

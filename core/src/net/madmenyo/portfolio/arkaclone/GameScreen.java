@@ -1,13 +1,11 @@
 package net.madmenyo.portfolio.arkaclone;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
-import net.madmenyo.portfolio.arkaclone.game.GameWorldRenderer;
 import net.madmenyo.portfolio.arkaclone.game.GameWorld;
+import net.madmenyo.portfolio.arkaclone.game.GameWorldRenderer;
 import net.madmenyo.portfolio.arkaclone.game.IWorldRenderer;
 
 /**
