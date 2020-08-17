@@ -36,6 +36,7 @@ public class Ball
 		sprite = new Sprite(ballRegion);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setOriginBasedPosition(paddleCenter.x, paddleCenter.y + sprite.getHeight() / 2);
+		
 	}
 
 	public void update(float delta){

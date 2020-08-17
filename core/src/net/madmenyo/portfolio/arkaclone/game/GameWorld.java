@@ -1,7 +1,9 @@
 package net.madmenyo.portfolio.arkaclone.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.Vector2;
 
 /**
  * ArkaClone [2020]
@@ -24,14 +26,22 @@ public class GameWorld
 	public static final float WORLD_HEIGHT = (BRICK_HEIGHT * VERTICAL_BRICKS) + (BORDER_WIDTH * 2) + PADDLE_SPACE;
 
 
-	private Brick[][] bricks;
 	private TextureAtlas atlas;
+
+	private Brick[][] bricks;
+	private Ball ball;
 
 	public GameWorld(TextureAtlas atlas)
 	{
 		this.atlas = atlas;
 
 		createTestBricks(12, 8);
+		createTestBall();
+	}
+
+	private void createTestBall()
+	{
+		ball = new Ball(new Vector2(0, 20), atlas.findRegion("ball_blue"));
 	}
 
 	private void createTestBricks(int width, int height)
@@ -46,7 +56,7 @@ public class GameWorld
 	}
 
 	public void update(float delta){
-
+		ball.update(delta);
 	}
 
 	public void draw(SpriteBatch batch)
@@ -56,5 +66,7 @@ public class GameWorld
 				bricks[x][y].getSprite().draw(batch);
 			}
 		}
+
+		ball.draw(batch);
 	}
 }
