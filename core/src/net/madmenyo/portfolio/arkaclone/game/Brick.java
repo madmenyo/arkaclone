@@ -12,13 +12,13 @@ import java.awt.Rectangle;
 
 public class Brick
 {
-	private Rectangle collisionRectangle;
 	private Sprite sprite;
 
 	public Brick(int x, int y, TextureRegion region)
 	{
+		float offset = GameWorld.WORLD_WIDTH / 2;
 		sprite = new Sprite(region);
-		sprite.setBounds(x * GameWorld.BRICK_WIDTH, y * GameWorld.BRICK_HEIGHT, GameWorld.BRICK_WIDTH, GameWorld.BRICK_HEIGHT);
+		sprite.setBounds(x * GameWorld.BRICK_WIDTH - offset, y * GameWorld.BRICK_HEIGHT, GameWorld.BRICK_WIDTH, GameWorld.BRICK_HEIGHT);
 	}
 
 	public Sprite getSprite()

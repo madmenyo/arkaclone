@@ -10,8 +10,15 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 public class GameWorld
 {
-	public static final float BRICK_WIDTH = 2;
-	public static final float BRICK_HEIGHT = 1;
+	public static final int BRICK_WIDTH = 32;
+	public static final int BRICK_HEIGHT = 16;
+
+	public static final int BORDER_WIDTH = 16;
+
+	public static final int HORIZONTAL_BRICKS = 12;
+
+	public static final float WORLD_WIDTH = BRICK_WIDTH * 12 + BORDER_WIDTH * 2;
+
 
 	private Brick[][] bricks;
 	private TextureAtlas atlas;
@@ -20,7 +27,7 @@ public class GameWorld
 	{
 		this.atlas = atlas;
 
-		createTestBricks(6, 6);
+		createTestBricks(12, 8);
 	}
 
 	private void createTestBricks(int width, int height)

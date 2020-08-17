@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		//PackImages();
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = 1280;
-		config.height = 720;
+		config.width = 1280 / 2;
+		config.height = 720 / 2;
 		config.forceExit = false;
 		new LwjglApplication(new ArkaClone(), config);
 	}
