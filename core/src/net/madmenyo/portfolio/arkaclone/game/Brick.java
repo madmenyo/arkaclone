@@ -8,6 +8,8 @@ import java.awt.Rectangle;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * Bricks need to be destroyed by a ball
  */
 
 public class Brick

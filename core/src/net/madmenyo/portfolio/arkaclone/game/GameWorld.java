@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * The GameWorld class is a wrapper class for everything in the game and gives access to dimensions.
  */
 
 public class GameWorld
@@ -46,11 +48,19 @@ public class GameWorld
 		createTestBall();
 	}
 
+	/**
+	 * Just test method for now
+	 */
 	private void createTestBall()
 	{
 		ball = new Ball(paddle, atlas.findRegion("ball_big_darkblue"));
 	}
 
+	/**
+	 * Just test method for now
+	 * @param width amount of bricks horizontal
+	 * @param height amount of bricks vertical
+	 */
 	private void createTestBricks(int width, int height)
 	{
 		bricks = new Brick[width][height];

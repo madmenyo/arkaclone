@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -30,6 +31,11 @@ public class Ball
 
 	private Sprite sprite;
 
+	/**
+	 * The ball fired by the paddle, initially fixed to the center of the paddle
+	 * @param paddle
+	 * @param ballRegion
+	 */
 	public Ball(Paddle paddle, TextureRegion ballRegion)
 	{
 		this.paddle = paddle;
@@ -39,8 +45,21 @@ public class Ball
 
 	}
 
+	/**
+	 * used to instantiate multiball balls from a ball
+	 * @param ball
+	 */
+	public Ball(Ball ball){
+		ballState = State.Moving;
+		sprite.set(ball.sprite);
+		// Randomizedirection
+		direction.rotate(MathUtils.random(360));
+
+	}
+
 	public void update(float delta){
 
+		// Check state, if serving keep moving with paddle, otherwise update normally
 		if (ballState.equals(State.Serving)){
 			if (Gdx.input.isKeyPressed(Input.Keys.SPACE)){
 				ballState = State.Moving;

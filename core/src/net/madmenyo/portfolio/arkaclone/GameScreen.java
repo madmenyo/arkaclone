@@ -13,6 +13,8 @@ import net.madmenyo.portfolio.arkaclone.game.IWorldRenderer;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * The screen that shows the actual play field and the user interface
  */
 
 public class GameScreen extends BaseScreen

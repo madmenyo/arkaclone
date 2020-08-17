@@ -9,6 +9,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * Responsible for loading, providing and (not yet) disposing assets.
  */
 
 public class Assets

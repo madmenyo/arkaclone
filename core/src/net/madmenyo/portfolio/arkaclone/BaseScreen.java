@@ -13,6 +13,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * A base screen, stage will be reused and cleared each screen.
  */
 
 public abstract class BaseScreen extends ScreenAdapter

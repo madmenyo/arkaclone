@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * The main menu screen
  */
 
 public class MainMenuScreen extends BaseScreen

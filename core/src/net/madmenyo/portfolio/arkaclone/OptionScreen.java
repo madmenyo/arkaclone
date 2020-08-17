@@ -8,6 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * the options screen
  */
 
 class OptionScreen extends BaseScreen

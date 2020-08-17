@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector2;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * The player controlled paddle to bounce the ball back and catch powerups.
  */
 
 public class Paddle

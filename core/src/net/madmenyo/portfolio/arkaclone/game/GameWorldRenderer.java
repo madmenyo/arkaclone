@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 /**
  * ArkaClone [2020]
  * By Menno Gouw
+ *
+ * This renderer just uses a camera and sets zooming levels based on the amount of pixels in the
+ * window. If it has room to zoom to double the pixel size it does.
  */
 
 public class GameWorldRenderer implements IWorldRenderer
