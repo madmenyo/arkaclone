@@ -3,6 +3,9 @@ package net.madmenyo.portfolio.arkaclone.game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * ArkaClone [2020]
  * By Menno Gouw
@@ -33,7 +36,7 @@ public class GameWorld
 	private PlayField playField;
 
 	private Paddle paddle;
-	private Brick[][] bricks;
+	private List<Brick> bricks;
 	private Ball ball;
 
 	public GameWorld(TextureAtlas atlas)
@@ -51,7 +54,7 @@ public class GameWorld
 	 */
 	private void createTestBall()
 	{
-		ball = new Ball(paddle, atlas.findRegion("ball_big_darkblue"));
+		ball = new Ball(paddle, bricks, playField, atlas.findRegion("ball_big_darkblue"));
 	}
 
 	/**
@@ -61,11 +64,10 @@ public class GameWorld
 	 */
 	private void createTestBricks(int width, int height)
 	{
-		bricks = new Brick[width][height];
-
+		bricks = new ArrayList<>();
 		for (int y = 0; y < height; y++){
 			for (int x = 0; x < width; x++){
-				bricks[x][y] = new Brick(x, y, atlas.findRegion("brick_blue"));
+				bricks.add(new Brick(x, y, atlas.findRegion("brick_blue")));
 			}
 		}
 	}
@@ -79,12 +81,9 @@ public class GameWorld
 	{
 		playField.draw(batch);
 		paddle.draw(batch);
-		for (int y = 0; y < bricks[0].length; y++){
-			for (int x = 0; x < bricks.length; x++){
-				bricks[x][y].getSprite().draw(batch);
-			}
+		for (Brick brick : bricks){
+			brick.getSprite().draw(batch);
 		}
-
 		ball.draw(batch);
 	}
 }

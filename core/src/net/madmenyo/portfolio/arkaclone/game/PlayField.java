@@ -52,4 +52,9 @@ public class PlayField
 
 		}
 	}
+
+	public Rectangle getRectangle()
+	{
+		return rectangle;
+	}
 }
