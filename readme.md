@@ -1,6 +1,9 @@
 # ArkaClone
 
-ArkaClone is a lose clone of arkanoid and created in LibGDX as a portfolio piece. While still trying to get this to look good the emphasis is laid on good and clean code.
+ArkaClone is a lose clone of arkanoid and created in LibGDX as a portfolio piece. While still trying to get this to look good the emphasis is laid on good and clean code as well as good gameplay.
+
+# Version
+The game is not yet in a playable state, I keep pushing to master until it is then branch off to a dev and feature branch.
 
 ## Getting it to run
 
