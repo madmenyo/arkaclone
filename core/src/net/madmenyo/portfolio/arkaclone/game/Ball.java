@@ -37,7 +37,9 @@ public class Ball
 
 	private Sprite sprite;
 	private Circle collisionCircle = new Circle();
-	private Rectangle collisionRectangle = new Rectangle();
+
+	private Vector2 currentPosition = new Vector2();
+	private Vector2 endPosition = new Vector2();
 
 	/**
 	 * The ball fired by the paddle, initially fixed to the center of the paddle
@@ -51,13 +53,16 @@ public class Ball
 		this.paddle = paddle;
 		this.bricks = bricks;
 		this.playField = playField;
+		currentPosition.set(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
+		endPosition.set(currentPosition);
+		// Set sprite based on current position;
 		sprite = new Sprite(ballRegion);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
-		sprite.setOriginBasedPosition(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
+		sprite.setOriginBasedPosition(currentPosition.x, currentPosition.y);
 	}
 
 	/**
-	 * used to instantiate multiball balls from a ball
+	 * perhaps used to instantiate multiball balls from a ball
 	 * @param ball
 	 */
 	public Ball(Ball ball){
@@ -75,15 +80,24 @@ public class Ball
 				ballState = State.Moving;
 			} else {
 				// Should move with paddle
-				sprite.setOriginBasedPosition(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
+				endPosition.set(paddle.sprite.getX() + paddle.sprite.getOriginX(), paddle.sprite.getY() + paddle.sprite.getOriginY());
+				positionSprite();
 				return;
 			}
 		}
 		velocity.set(direction).scl(speed * delta);
 		//Set the collision circle at end of frame position for detection;
-		handleCollision();
-		sprite.translate(velocity.x, velocity.y);
+		endPosition.set(currentPosition).add(velocity);
+		//handleCollision(delta);
+		//sprite.translate(velocity.x, velocity.y);
 		// ToDo: Check for collision on new position value
+
+		positionSprite();
+	}
+
+	private void positionSprite(){
+		currentPosition.set(endPosition);
+		sprite.setOriginBasedPosition(currentPosition.x, currentPosition.y);
 	}
 
 	public void draw(SpriteBatch batch){
@@ -94,18 +108,23 @@ public class Ball
 	/**
 	 * Handles all collision for the ball
 	 */
-	public void handleCollision(){
+	public void handleCollision(float delta){
 		collisionCircle.set(sprite.getX() + sprite.getOriginX() + velocity.x, sprite.getY() + sprite.getOriginY() + velocity.y, sprite.getWidth() / 2);
 		// Add some statement to see what part the ball is and then check vs possible candidates
 		if (paddleCollision()) return;
 		if (fieldCollision()) return;
-		if (brickCollision()){
+		if (brickCollision(delta)){
 			ballState = State.Serving;
 			return;
 		}
 	}
 
-	private boolean brickCollision()
+	/**
+	 * Handles collision for the bricks
+	 * @param delta
+	 * @return returns true if there is a brick collision
+	 */
+	private boolean brickCollision(float delta)
 	{
 		// Loop trough all bricks
 		for (Brick brick : bricks){
@@ -115,7 +134,7 @@ public class Ball
 				collisionCircle.set(sprite.getX() + sprite.getOriginX(), sprite.getY() + sprite.getOriginY(), sprite.getWidth() / 2);
 				if (!Intersector.overlaps(collisionCircle, brick.getSprite().getBoundingRectangle())) continue;
 				//Create rectangle to generate a overlap rect
-				Vector2 intersection = handleRectangleCollision(brick.getSprite().getBoundingRectangle());
+				Vector2 intersection = handleRectangleCollision(brick.getSprite().getBoundingRectangle(), delta);
 				return true;
 			}
 		}
@@ -123,7 +142,13 @@ public class Ball
 	}
 
 
-	private Vector2 handleRectangleCollision(Rectangle boundingRectangle)
+	/**
+	 * Handles collision for rectangles, rectangles are slightly harder to predict vs a circle and the ball needs to change direction based on the colliding side.
+	 * @param boundingRectangle
+	 * @param delta
+	 * @return The final ball position after collision
+	 */
+	private Vector2 handleRectangleCollision(Rectangle boundingRectangle, float delta)
 	{
 		// Get start point and end point
 		Vector2 startPoint = new Vector2();
@@ -140,6 +165,12 @@ public class Ball
 		Vector2 intersectionOut = new Vector2();
 		if (Intersector.intersectSegments(startPoint, endPoint, v1, v2, intersectionOut)){
 			Gdx.app.log("Ball", "intersection at left side: " + intersectionOut);
+			// Get distance to edge of rectangle
+			float ditanceToEdge = currentPosition.dst(intersectionOut) - sprite.getWidth() / 2;
+			// Travel this distance
+
+
+			remainingDistance(intersectionOut, speed * delta);
 			return intersectionOut;
 		} else if (Intersector.intersectSegments(startPoint, endPoint, v2, v3, intersectionOut))
 		{
@@ -167,5 +198,9 @@ public class Ball
 	private boolean paddleCollision()
 	{
 		return false;
+	}
+
+	private float remainingDistance(Vector2 collisionPoint, float totalDistance){
+		return totalDistance - currentPosition.dst(collisionPoint);
 	}
 }

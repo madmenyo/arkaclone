@@ -8,7 +8,7 @@ import net.madmenyo.portfolio.arkaclone.ArkaClone;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
-		PackImages();
+		//PackImages();
 
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = 1280 / 2;
