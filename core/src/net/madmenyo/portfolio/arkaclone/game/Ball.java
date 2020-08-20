@@ -167,10 +167,15 @@ public class Ball
 			Gdx.app.log("Ball", "intersection at left side: " + intersectionOut);
 			// Get distance to edge of rectangle
 			float ditanceToEdge = currentPosition.dst(intersectionOut) - sprite.getWidth() / 2;
-			// Travel this distance
 
+			// Get the distance left and intersection point
+			float distanceLeft = remainingDistance(intersectionOut, speed * delta);
+			// Set currentPosition and Endposition so the ball hugs the edge using intersectionOut
 
-			remainingDistance(intersectionOut, speed * delta);
+			//correctly rotate direction based on side the ball hit and
+
+			// now rerun with the distance that is left and the new direction
+
 			return intersectionOut;
 		} else if (Intersector.intersectSegments(startPoint, endPoint, v2, v3, intersectionOut))
 		{
