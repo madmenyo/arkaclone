@@ -37,6 +37,7 @@ public class Ball
 
 	private Sprite sprite;
 	private Circle collisionCircle = new Circle();
+	private Rectangle collisionRectangle = new Rectangle();
 
 	private Vector2 currentPosition = new Vector2();
 	private Vector2 endPosition = new Vector2();
@@ -85,14 +86,21 @@ public class Ball
 				return;
 			}
 		}
-		velocity.set(direction).scl(speed * delta);
-		//Set the collision circle at end of frame position for detection;
-		endPosition.set(currentPosition).add(velocity);
-		//handleCollision(delta);
-		//sprite.translate(velocity.x, velocity.y);
-		// ToDo: Check for collision on new position value
 
+		// calculate where ball will be moved
+		calculateEndPosition(speed * delta);
+		// detect collision
+		handleCollision(delta);
 		positionSprite();
+	}
+
+	/**
+	 * Calculates and sets endPosition based on currentPosition, direction and speed
+	 * @param distance the distance, either calculated after a collision or by multiplieing delta by speed
+	 */
+	private void calculateEndPosition(float distance) {
+		velocity.set(direction).scl(distance);
+		endPosition.set(currentPosition).add(velocity);
 	}
 
 	private void positionSprite(){
@@ -106,15 +114,19 @@ public class Ball
 
 
 	/**
-	 * Handles all collision for the ball
+	 * Handles all collision for the ball, first calculate end position then run this.
+	 * If there is a collision set current position at the edge of the collision, and run this again with newly calculated end position
 	 */
 	public void handleCollision(float delta){
-		collisionCircle.set(sprite.getX() + sprite.getOriginX() + velocity.x, sprite.getY() + sprite.getOriginY() + velocity.y, sprite.getWidth() / 2);
+		// Set the collision shapes
+		collisionCircle.set(endPosition.x + sprite.getOriginX(), endPosition.y + sprite.getOriginY(), sprite.getWidth() / 2);
+		collisionRectangle.set(endPosition.x, endPosition.y, sprite.getWidth(), sprite.getHeight());
+
 		// Add some statement to see what part the ball is and then check vs possible candidates
 		if (paddleCollision()) return;
 		if (fieldCollision()) return;
 		if (brickCollision(delta)){
-			ballState = State.Serving;
+			//ballState = State.Serving;
 			return;
 		}
 	}
@@ -129,12 +141,14 @@ public class Ball
 		// Loop trough all bricks
 		for (Brick brick : bricks){
 			// Check cheap rectangles
-			if (sprite.getBoundingRectangle().overlaps(brick.getSprite().getBoundingRectangle())){
-				// Set bounding circle and check if there really is a collision, if not continue iterating
-				collisionCircle.set(sprite.getX() + sprite.getOriginX(), sprite.getY() + sprite.getOriginY(), sprite.getWidth() / 2);
+			if (collisionRectangle.overlaps(brick.getSprite().getBoundingRectangle())){
+				// Check if there really is a collision on circle, if not continue iterating
 				if (!Intersector.overlaps(collisionCircle, brick.getSprite().getBoundingRectangle())) continue;
 				//Create rectangle to generate a overlap rect
-				Vector2 intersection = handleRectangleCollision(brick.getSprite().getBoundingRectangle(), delta);
+				float distanceLeft = handleRectangleCollision(brick.getSprite().getBoundingRectangle(), delta);
+				calculateEndPosition(distanceLeft);
+				// Calculate collision again
+				handleCollision(delta);
 				return true;
 			}
 		}
@@ -143,17 +157,19 @@ public class Ball
 
 
 	/**
-	 * Handles collision for rectangles, rectangles are slightly harder to predict vs a circle and the ball needs to change direction based on the colliding side.
+	 * Handles collision for rectangles, sets the ball at the edge of the collision and returns the remaining distance.
 	 * @param boundingRectangle
-	 * @param delta
-	 * @return The final ball position after collision
+	 * @param distanceToTravel
+	 * @return The remaining distance. It's the speed * delta minus distance to edge of collision
 	 */
-	private Vector2 handleRectangleCollision(Rectangle boundingRectangle, float delta)
+	private float handleRectangleCollision(Rectangle boundingRectangle, float distanceToTravel)
 	{
 		// Get start point and end point
 		Vector2 startPoint = new Vector2();
-		sprite.getBoundingRectangle().getCenter(startPoint);
+		startPoint.set(currentPosition);
+		//sprite.getBoundingRectangle().getCenter(startPoint);
 		Vector2 endPoint = startPoint.cpy().add(velocity);
+		endPoint.set(endPosition);
 
 		// Try intersecting it with the 4 sides of rectangle to find the side it collided with;
 		// Get 4 verts
@@ -163,36 +179,70 @@ public class Ball
 		Vector2 v4 = new Vector2(boundingRectangle.x + boundingRectangle.width, boundingRectangle.y);
 
 		Vector2 intersectionOut = new Vector2();
+		// left side
 		if (Intersector.intersectSegments(startPoint, endPoint, v1, v2, intersectionOut)){
 			Gdx.app.log("Ball", "intersection at left side: " + intersectionOut);
 			// Get distance to edge of rectangle
-			float ditanceToEdge = currentPosition.dst(intersectionOut) - sprite.getWidth() / 2;
+			float distanceToEdge = currentPosition.dst(intersectionOut) - sprite.getWidth() / 2;
 
-			// Get the distance left and intersection point
-			float distanceLeft = remainingDistance(intersectionOut, speed * delta);
+			// Calculate remaining distance
+			float distanceLeft = remainingDistance(intersectionOut, distanceToTravel);
 			// Set currentPosition and Endposition so the ball hugs the edge using intersectionOut
 
+			// find colliding position
+			Vector2 colPos = new Vector2();
+			colPos.set(direction).scl(distanceToTravel - distanceLeft).add(currentPosition);
+
+			currentPosition.set(colPos);
+			endPosition.set(direction);
+
 			//correctly rotate direction based on side the ball hit and
+			direction.x = -direction.x;
 
 			// now rerun with the distance that is left and the new direction
 
-			return intersectionOut;
-		} else if (Intersector.intersectSegments(startPoint, endPoint, v2, v3, intersectionOut))
+			return distanceLeft;
+		}
+		// Top
+		else if (Intersector.intersectSegments(startPoint, endPoint, v2, v3, intersectionOut))
 		{
 			Gdx.app.log("Ball", "intersection at top side: " + intersectionOut);
-			return intersectionOut;
-		} else if (Intersector.intersectSegments(startPoint, endPoint, v3, v4, intersectionOut))
+			return distanceToTravel;
+		}
+		// right
+		else if (Intersector.intersectSegments(startPoint, endPoint, v3, v4, intersectionOut))
 		{
 			Gdx.app.log("Ball", "intersection at right side: " + intersectionOut);
-			return intersectionOut;
-		} else if (Intersector.intersectSegments(startPoint, endPoint, v4, v1, intersectionOut))
+			return distanceToTravel;
+		}
+		// Bottom
+		else if (Intersector.intersectSegments(startPoint, endPoint, v4, v1, intersectionOut))
 		{
 			Gdx.app.log("Ball", "intersection at bottom side: " + intersectionOut);
-			return intersectionOut;
+			// Get distance to edge of rectangle
+			float distanceToEdge = currentPosition.dst(intersectionOut) - sprite.getWidth() / 2;
+
+			// Calculate remaining distance
+			float distanceLeft = remainingDistance(intersectionOut, distanceToTravel);
+			// Set currentPosition and Endposition so the ball hugs the edge using intersectionOut
+
+			// find colliding position
+			Vector2 colPos = new Vector2();
+			colPos.set(direction).scl(distanceToTravel - distanceLeft).add(currentPosition);
+
+			currentPosition.set(colPos);
+			endPosition.set(currentPosition);
+
+			//correctly rotate direction based on side the ball hit and
+			direction.y = -direction.y;
+
+			// now rerun with the distance that is left and the new direction
+
+			return distanceLeft;
 		}
 
 		Gdx.app.log("Ball", "No intersection? This method should not have triggered then");
-		return null;
+		return 0;
 	}
 
 	private boolean fieldCollision()
