@@ -61,6 +61,10 @@ public class Ball
 		sprite = new Sprite(ballRegion);
 		sprite.setOrigin(sprite.getWidth() / 2, sprite.getHeight() / 2);
 		sprite.setOriginBasedPosition(currentPosition.x, currentPosition.y);
+
+		Rectangle brickRec = new Rectangle(100, 100, 64, 32);
+		Rectangle ballRec = new Rectangle(133, 80, 32, 32);
+		getSide(brickRec, ballRec);
 	}
 
 	/**
@@ -93,6 +97,42 @@ public class Ball
 		// detect collision
 		handleCollision(delta);
 		positionSprite();
+	}
+
+	private enum Sides{
+		Top,
+		Bottom,
+		Left,
+		Right
+	}
+
+	private void getSide(Rectangle brickRec,  Rectangle ballRec){
+		Rectangle intersection = new Rectangle();
+		Intersector.intersectRectangles(ballRec, brickRec, intersection);
+
+		int x = 0;
+		int y = 0;
+		if (intersection.x > ballRec.x){
+			System.out.println("Left");
+			x = (int)((ballRec.x + ballRec.width / 2) - intersection.x);
+		}
+		if (intersection.y > ballRec.y){
+			System.out.println("Bottom");
+			y = (int)((ballRec.y + ballRec.height / 2) - intersection.y);
+		}
+		if (intersection.x + intersection.width < ballRec.x + ballRec.width){
+			System.out.println("Right");
+			x = (int)((ballRec.x + ballRec.width / 2) - intersection.x + intersection.width);
+		}
+		if (intersection.y + intersection.height < ballRec.y + ballRec.height){
+			System.out.println("Top");
+			y = (int)((ballRec.y + ballRec.height / 2) - intersection.y + intersection.height);
+		}
+
+		System.out.println("x: " + x);
+		System.out.println("y: " + y);
+
+
 	}
 
 	/**
@@ -174,16 +214,9 @@ public class Ball
 		startPoint.set(currentPosition);
 		//sprite.getBoundingRectangle().getCenter(startPoint);
 		Vector2 endPoint = new Vector2();
-		//endPoint.set(direction).scl(distanceToTravel).add(startPoint);
-		//Vector2 endPoint = startPoint.cpy().add(velocity);
-		endPoint.set(direction).scl(collisionCircle.radius).add(endPosition);
 
-		System.out.println("Radius: " + sprite.getWidth());
-		System.out.println("Circle: " + collisionCircle);
-		System.out.println("Curpos: " + currentPosition);
-		System.out.println("EndPos: " + endPosition);
-		System.out.println("Startpoint: " + startPoint);
-		System.out.println("Endpoint: " + endPoint);
+		// Set the endpoint, this should be
+		endPoint.set(direction).scl(collisionCircle.radius).add(endPosition);
 
 
 		// Try intersecting it with the 4 sides of rectangle to find the side it collided with;
@@ -192,9 +225,6 @@ public class Ball
 		Vector2 v2 = new Vector2(boundingRectangle.x, boundingRectangle.y + boundingRectangle.height);
 		Vector2 v3 = new Vector2(boundingRectangle.x + boundingRectangle.width, boundingRectangle.y + boundingRectangle.height);
 		Vector2 v4 = new Vector2(boundingRectangle.x + boundingRectangle.width, boundingRectangle.y);
-
-		//System.out.println(startPoint + " / " + endPoint);
-		//System.out.println(v1 + " / " + v4);
 
 		Vector2 intersectionOut = new Vector2();
 		// left side
