@@ -6,21 +6,21 @@ filter: Nearest,Nearest
 repeat: none
 ball_big_darkblue
   rotate: false
-  xy: 70, 25
-  size: 8, 8
-  orig: 8, 8
+  xy: 102, 107
+  size: 16, 16
+  orig: 16, 16
   offset: 0, 0
   index: -1
 ball_blue
   rotate: false
-  xy: 102, 97
+  xy: 70, 25
   size: 8, 8
   orig: 8, 8
   offset: 0, 0
   index: -1
 bordercorner_yellow
   rotate: false
-  xy: 102, 107
+  xy: 102, 89
   size: 16, 16
   orig: 16, 16
   offset: 0, 0

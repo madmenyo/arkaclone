@@ -51,6 +51,7 @@ public class Ball
 	 */
 	public Ball(Paddle paddle, List<Brick> bricks, PlayField playField, TextureRegion ballRegion)
 	{
+		System.out.println(ballRegion.getRegionWidth());
 		this.paddle = paddle;
 		this.bricks = bricks;
 		this.playField = playField;
